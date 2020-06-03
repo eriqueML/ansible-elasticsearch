@@ -26,7 +26,8 @@ elasticsearch_config_node_name: "{{ ansible_hostname }}"
 elasticsearch_config_cluster_name: elasticsearch
 
 elasticsearch_config_discovery_seed_hosts: null
-elasticsearch_config_discovery_initial_master_nodes: "{{ inventory_hostname }}"
+elasticsearch_config_discovery_initial_master_nodes: null
+elasticsearch_discovery_type: "single-node"
 elasticsearch_max_threads: 8192
 elasticsearch_max_open_files: 65536
 
