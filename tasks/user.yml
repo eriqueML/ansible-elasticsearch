@@ -1,0 +1,17 @@
+---
+- name: Ensure group of elasticsearch exists
+  group:
+    name: "{{ elasticsearch_group }}"
+    state: present
+    gid: "{{ elasticsearch_group_id }}"
+  notify: Restart elasticsearch
+  
+- name: Ensure elasticsearch user exists
+  user:
+    name: "{{ elasticsearch_user }}"
+    state: present
+    home: "{{ elasticsearch_home }}"
+    uid: "{{ elasticsearch_user_id }}"
+    group: "{{ elasticsearch_group }}"
+    shell: /bin/bash
+  notify: Restart elasticsearch

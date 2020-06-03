@@ -1,0 +1,12 @@
+---
+- name: Group and user creation
+  include_tasks: user.yml
+ 
+- name: Install elasticsearch
+  include_tasks: install.yml
+
+- name: Config elasticsearch
+  include_tasks: config.yml
+
+- name: Strt elasticsearch
+  include_tasks: start.yml

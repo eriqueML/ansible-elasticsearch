@@ -1,0 +1,37 @@
+---
+# elasticsearch user and group vars
+elasticsearch_group: elasticsearch
+elasticsearch_group_id: "{{ omit }}"
+elasticsearch_user: elasticsearch
+elasticsearch_user_id: "{{ omit }}"
+
+# elasticsearch installation vars
+elasticsearch_install_rpm_url: "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-{{ elasticsearch_version }}-x86_64.rpm"
+elasticsearch_install_rpm_dest: "/tmp"
+elasticsearch_version: 7.7.0 
+
+# general vars
+elasticsearch_home: "/usr/share/elasticsearch"
+elasticsearch_conf_dir: "/etc/elasticsearch"
+elasticsearch_data_dir: "/var/lib/elasticsearch"
+elasticsearch_pid_dir: "/var/run/elasticsearch"
+elasticsearch_log_dir: "/var/log/elasticsearch"
+elasticsearch_tmp_dir: "{{ elasticsearch_data_dir }}/tmp"
+elasticsearch_sysd_script: "/etc/systemd/system/elasticsearch.service"
+elasticsearch_default_file: "/etc/default/elasticsearch"
+
+elasticsearch_network_host: "{{ inventory_hostname }}"
+elasticsearch_http_port: 9200
+elasticsearch_config_node_name: "{{ ansible_hostname }}"
+elasticsearch_config_cluster_name: elasticsearch
+
+elasticsearch_config_discovery_seed_hosts: null
+elasticsearch_config_discovery_initial_master_nodes: "{{ inventory_hostname }}"
+elasticsearch_max_threads: 8192
+elasticsearch_max_open_files: 65536
+
+elasticsearch_jvm_option_heap_size: 2g
+elasticsearch_jvm_custom_parameters: []
+
+elasticsearch_service_state: started
+elasticsearch_service_enabled: true
