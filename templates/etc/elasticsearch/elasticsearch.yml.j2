@@ -60,3 +60,7 @@ network.host: {{ elasticsearch_network_host }}
 http.port: {{ elasticsearch_http_port }}
 
 discovery.type: {{ elasticsearch_discovery_type }}
+# --------------------------------- Security ----------------------------------
+{% if elasticsearch_xpack_security_enabled %}
+xpack.security.enabled: {{ elasticsearch_xpack_security_enabled }}
+{% endif %}

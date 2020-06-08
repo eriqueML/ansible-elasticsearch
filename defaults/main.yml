@@ -31,8 +31,15 @@ elasticsearch_discovery_type: "single-node"
 elasticsearch_max_threads: 8192
 elasticsearch_max_open_files: 65536
 
+# elasticsearch jvm vars
 elasticsearch_jvm_option_heap_size: 2g
 elasticsearch_jvm_custom_parameters: []
 
+# systemd vars
 elasticsearch_service_state: started
 elasticsearch_service_enabled: true
+
+# xpack security vars
+elasticsearch_xpack_security_enabled: false
+elasticsearch_xpack_security_transport_ssl_enabled: false
+elasticsearch_xpack_security_transport_ssl_verification_mode: certificate
