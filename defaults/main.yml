@@ -20,7 +20,7 @@ elasticsearch_tmp_dir: "{{ elasticsearch_data_dir }}/tmp"
 elasticsearch_sysd_script: "/etc/systemd/system/elasticsearch.service"
 elasticsearch_default_file: "/etc/default/elasticsearch"
 
-elasticsearch_network_host: "{{ inventory_hostname }}"
+elasticsearch_network_host: "127.0.0.1"
 elasticsearch_http_port: 9200
 elasticsearch_config_node_name: "{{ ansible_hostname }}"
 elasticsearch_config_cluster_name: elasticsearch
@@ -43,3 +43,31 @@ elasticsearch_service_enabled: true
 elasticsearch_xpack_security_enabled: false
 elasticsearch_xpack_security_transport_ssl_enabled: false
 elasticsearch_xpack_security_transport_ssl_verification_mode: certificate
+
+elasticsearch_xpack_security_realm_users_dest: "{{ elasticsearch_conf_dir }}/users"
+elasticsearch_xpack_security_realm_users: {}
+#  erik:
+#    password: "$1$nvCaZ.hE$U.pxune8PGZ.MkceYRW58/"
+#  bogdan:
+#    password: "$1$dpU1J/4w$i9JcHaCzuCCmIr40NuTCW/"
+
+elasticsearch_xpack_security_realm_users_roles_dest: "{{ elasticsearch_conf_dir }}/users_roles"
+elasticsearch_xpack_security_realm_users_roles: {}
+#  admin:
+#    users:
+#      - erik
+#      - bogdan
+#  kibana_admin:
+#    users:
+#      - erik
+
+elasticsearch_xpack_security_realm_roles_dest: "{{ elasticsearch_conf_dir }}/roles.yml"
+elasticsearch_xpack_security_realm_roles: {}
+#  admin:
+#    cluster:
+#      - all
+#    indices:
+#      - names:
+#          - "*"
+#        privileges:
+#          - all

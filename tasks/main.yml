@@ -8,5 +8,9 @@
 - name: Config elasticsearch
   include_tasks: config.yml
 
-- name: Strt elasticsearch
+- name: Security tasks
+  include_tasks: security.yml
+  when: elasticsearch_xpack_security_enabled
+
+- name: Start elasticsearch
   include_tasks: start.yml

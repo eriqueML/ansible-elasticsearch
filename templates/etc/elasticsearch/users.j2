@@ -1,0 +1,5 @@
+{% if elasticsearch_xpack_security_enabled and elasticsearch_xpack_security_realm_users | length > 0 %}
+{% for item in elasticsearch_xpack_security_realm_users | dict2items %}
+{{ item.key }}:{{ item.value.password }}
+{% endfor %}
+{% endif %}

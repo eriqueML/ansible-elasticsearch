@@ -1,0 +1,30 @@
+---
+- name: Create realm users file from template
+  template:
+    src: etc/elasticsearch/users.j2
+    dest: "{{ elasticsearch_xpack_security_realm_users_dest }}"
+    owner: "{{ elasticsearch_user }}"
+    group: "{{ elasticsearch_group }}"
+    mode: 0644
+  when: elasticsearch_xpack_security_realm_users | length > 0
+  notify: Restart elasticsearch
+
+- name: Create realm users_roles file from template
+  template: 
+    src: etc/elasticsearch/users_roles.j2
+    dest: "{{ elasticsearch_xpack_security_realm_users_roles_dest }}"
+    owner: "{{ elasticsearch_user }}"
+    group: "{{ elasticsearch_group }}"
+    mode: 0644
+  when: elasticsearch_xpack_security_realm_users_roles | length > 0
+  notify: Restart elasticsearch
+
+- name: Create roles file
+  template: 
+    src: etc/elasticsearch/roles.yml.j2
+    dest: "{{ elasticsearch_xpack_security_realm_roles_dest }}"
+    owner: "{{ elasticsearch_user }}"
+    group: "{{ elasticsearch_group }}"
+    mode: 0644
+  when: elasticsearch_xpack_security_realm_roles | length > 0
+  notify: Restart elasticsearch
