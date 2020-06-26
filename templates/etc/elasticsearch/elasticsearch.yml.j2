@@ -1,66 +1,53 @@
 # ======================== Elasticsearch Configuration =========================
-#
-# NOTE: Elasticsearch comes with reasonable defaults for most settings.
-#       Before you set out to tweak and tune the configuration, make sure you
-#       understand what are you trying to accomplish and the consequences.
-#
-# The primary way of configuring a node is via this file. This template lists
-# the most important settings you may want to configure for a production cluster.
-#
-# Please consult the documentation for further information on configuration options:
-# https://www.elastic.co/guide/en/elasticsearch/reference/index.html
-#
 
 # ---------------------------------- Cluster -----------------------------------
-#
-# Use a descriptive name for your cluster:
-#
-cluster.name: {{ elasticsearch_config_cluster_name }}
-#
+
+cluster.name: {{ elasticsearch_cluster_name }}
+
 # ------------------------------------ Node ------------------------------------
-#
-# Use a descriptive name for the node:
-#
-node.name: {{ elasticsearch_config_node_name }}
-#
-# Add custom attributes to the node:
-#
+
+node.name: {{ elasticsearch_node_name }}
+
 #node.attr.rack: r1
-#
+
 # ----------------------------------- Paths ------------------------------------
-#
-# Path to directory where to store the data (separate multiple locations by comma):
-#
+
 path.data: {{ elasticsearch_data_dir }}
-#
-# Path to log files:
-#
+
 path.logs: {{ elasticsearch_log_dir }}
-#
+
 # ----------------------------------- Memory -----------------------------------
-#
-# Lock the memory on startup:
-#
+
 #bootstrap.memory_lock: true
-#
-# Make sure that the heap size is set to about half the memory available
-# on the system and that the owner of the process is allowed to use this
-# limit.
-#
-# Elasticsearch performs poorly when the system is swapping the memory.
-#
+
 # ---------------------------------- Network -----------------------------------
-#
-# Set the bind address to a specific IP (IPv4 or IPv6):
-#
+
 network.host: {{ elasticsearch_network_host }}
-#
-# Set a custom port for HTTP:
-#
+
 http.port: {{ elasticsearch_http_port }}
 
+# --------------------------------- Discovery ----------------------------------
+
+{% if elasticsearch_discovery_type is defined %}
 discovery.type: {{ elasticsearch_discovery_type }}
+{% else %}
+discovery.seed_hosts: {{ elasticsearch_discovery_seed_hosts | to_json }}
+
+cluster.initial_master_nodes: {{ elasticsearch_discovery_initial_master_nodes | to_json }}
+{% endif %}
+
 # --------------------------------- Security ----------------------------------
+
 {% if elasticsearch_xpack_security_enabled %}
 xpack.security.enabled: {{ elasticsearch_xpack_security_enabled }}
 {% endif %}
+
+{% if elasticsearch_xpack_security_api_key %}
+xpack.security.authc.api_key.enabled: true
+{% endif %}
+
+{% if elasticsearch_xpack_security_audit_enabled %}
+xpack.security.audit.enabled: {{ elasticsearch_xpack_security_audit_enabled }}
+{% endif %}
+
+# ---------------------------------- Logging -----------------------------------
