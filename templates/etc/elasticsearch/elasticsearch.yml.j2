@@ -41,13 +41,27 @@ cluster.initial_master_nodes: {{ elasticsearch_discovery_initial_master_nodes | 
 {% if elasticsearch_xpack_security_enabled %}
 xpack.security.enabled: {{ elasticsearch_xpack_security_enabled }}
 {% endif %}
-
 {% if elasticsearch_xpack_security_api_key %}
 xpack.security.authc.api_key.enabled: true
 {% endif %}
-
 {% if elasticsearch_xpack_security_audit_enabled %}
 xpack.security.audit.enabled: {{ elasticsearch_xpack_security_audit_enabled }}
+{% endif %}
+
+# xpack security transport
+{% if elasticsearch_xpack_security_transport_ssl_enabled %}
+xpack.security.transport.ssl.enabled: {{ elasticsearch_xpack_security_transport_ssl_enabled }}
+xpack.security.transport.ssl.verification_mode: {{ elasticsearch_xpack_security_transport_ssl_verification_mode }}
+xpack.security.transport.ssl.keystore.path: {{ elasticsearch_xpack_security_transport_ssl_keystore_path }}
+xpack.security.transport.ssl.truststore.path: {{ elasticsearch_xpack_security_transport_ssl_truststore_path }}
+{% endif %}
+
+# xpack security http
+{% if elasticsearch_xpack_security_http_ssl_enabled %}
+xpack.security.http.ssl.enabled: {{ elasticsearch_xpack_security_http_ssl_enabled }}
+xpack.security.http.ssl.key: {{ elasticsearch_xpack_security_http_ssl_key }}
+xpack.security.http.ssl.certificate: {{ elasticsearch_xpack_security_http_ssl_certificate }}
+xpack.security.http.ssl.certificate_authorities: {{ elasticsearch_xpack_security_http_ssl_certificate_authorities | to_json }}
 {% endif %}
 
 # ---------------------------------- Logging -----------------------------------

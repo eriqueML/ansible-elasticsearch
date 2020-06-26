@@ -66,10 +66,10 @@ elasticsearch_xpack_security_transport_ssl_certificate_authorities: "{{ omit }}"
 
 # xpack security http
 elasticsearch_xpack_security_http_ssl_enabled: false
-elasticsearch_xpack_security_http_ssl_keystore_path: 
+elasticsearch_xpack_security_http_ssl_keystore_path: "{{ omit }}" 
 elasticsearch_xpack_security_http_ssl_key: "{{ omit }}"
 elasticsearch_xpack_security_http_ssl_certificate: "{{ omit }}"
-elasticsearch_xpack_security_http_ssl_certificate_authorities: "{{ omit }}"
+elasticsearch_xpack_security_http_ssl_certificate_authorities: []
 
 # xpack security realm
 elasticsearch_xpack_security_realm_users_dest: "{{ elasticsearch_conf_dir }}/users"
